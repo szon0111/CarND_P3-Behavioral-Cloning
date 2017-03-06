@@ -7,7 +7,6 @@ with open('./data/driving_log.csv') as csvfile:
     for line in reader:
         lines.append(line)
 
-
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 
@@ -63,8 +62,6 @@ for line in validation_data:
     val_angles.append(angle - angle_correction)
 print("done loading {} validation images".format(len(val_images)))
 
-
-
 X_train = np.array(images_with_flipped)
 y_train = np.array(angles_with_flipped)
 X_val = np.array(val_images)
@@ -91,6 +88,6 @@ model.add(Dense(10))
 model.add(Dense(1))
 
 model.compile(optimizer='adam', loss='mse')
-model.fit(X_train, y_train, validation_data = (X_val, y_val), nb_epoch=3)
+model.fit(X_train, y_train, validation_data = (X_val, y_val), nb_epoch=5)
 
-model.save('Nvidia-model.h5')
+model.save('Nvidia-model-epoch5.h5')
