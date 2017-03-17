@@ -1,6 +1,7 @@
 # Project 3: Use Deep Learning to Clone Driving Behavior
 
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
 *please see [writeup.md](https://github.com/szon0111/CarND_P3-Behavioral-Cloning/blob/master/writeup.md) for a detailed report*
 Overview
 ---
