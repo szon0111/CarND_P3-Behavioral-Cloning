@@ -2,7 +2,7 @@ import os
 import csv
 
 lines = []
-with open('./data/driving_log.csv') as csvfile:
+with open('./data-copy2/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         lines.append(line)
@@ -22,7 +22,7 @@ for line in train_data:
     # use left, center, right camera images
     angle_correction = 0.1
     for i in range(3):
-        name = './data/IMG/' + line[i].split('\\')[-1]
+        name = './data-copy2/IMG/' + line[i].split('\\')[-1]
         image = cv2.imread(name)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         images.append(image)
@@ -51,7 +51,7 @@ for line in validation_data:
     # use left, center, right camera images
     angle_correction = 0.1
     for i in range(3):
-        name = './data/IMG/' + line[i].split('\\')[-1]
+        name = './data-copy2/IMG/' + line[i].split('\\')[-1]
         image = cv2.imread(name)
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         val_images.append(image)
@@ -69,9 +69,8 @@ y_val = np.array(val_angles)
 
 import keras
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda
+from keras.layers import Flatten, Dense, Lambda, Dropout
 from keras.layers.convolutional import Convolution2D, Cropping2D
-from keras.layers.pooling import MaxPooling2D
 
 model = Sequential()
 model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160, 320, 3)))
@@ -81,6 +80,7 @@ model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation='relu'))
 model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation='relu'))
 model.add(Convolution2D(64, 3, 3, activation='relu'))
 model.add(Convolution2D(64, 3, 3, activation='relu'))
+model.add(Dropout(0.8))
 model.add(Flatten())
 model.add(Dense(100))
 model.add(Dense(50))
@@ -90,4 +90,4 @@ model.add(Dense(1))
 model.compile(optimizer='adam', loss='mse')
 model.fit(X_train, y_train, validation_data = (X_val, y_val), nb_epoch=5)
 
-model.save('Nvidia-model-epoch5.h5')
+model.save('Nvidia-recoverydata-dp.h5')
