@@ -64,6 +64,7 @@ As the vehicle struggled in corners, I added short segements of driving data mak
 #### 4. Final Model Architecture
 
 Input images are first normalized and cropped using the keras functions to take advantage of the power of GPU. The top 70 pixels that include features like sky, trees, etc and the bottom 20 pixels that show the hood of the vehicle are not needed and thus removed - which helps reduce the computing power needed. 
-My model consists of 3 convolution layers with 5x5 filter sizes and depths of 24, 48, and 64, followed by 2 convolution layers with 3x3 filter sizes and depth of 64. 
-The model includes RELU layers to introduce nonlinearity and a dropout layer with a keep probability of 0.8 is added before reaching the 4 fully connected layers. The final output of this model is a single value for the steering angle.
+
+The model consists of 3 convolution layers with 5x5 filter sizes and depths of 24, 48, and 64, followed by 2 convolution layers with 3x3 filter sizes and depth of 64. RELU layers are used to introduce nonlinearity and a dropout layer with a keep probability of 0.8 is added before reaching the 4 fully connected layers. The final output of this model is a single value for the steering angle.
+
 The model was compiled after 5 epochs, which was the ideal number before validation loss stopped decreasing and the model started to overfit.
